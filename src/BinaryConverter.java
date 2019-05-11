@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -5,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BinaryConverter {
+public class BinaryConverter implements ActionListener{
 
 	JFrame frame; 
 	JPanel panel;
@@ -25,14 +28,16 @@ public class BinaryConverter {
 		frame.setVisible(true);
 		panel = new JPanel();
 		label = new JLabel();
+		label.setFont(label.getFont().deriveFont(25F));
 		button = new JButton();
 		button.setText("Convert");
-		answer = new JTextField("        ");
+		button.addActionListener(this);
+		answer = new JTextField(8);
 		frame.add(panel);
 		panel.add(answer);
 		panel.add(button);
 		panel.add(label);
-		frame.pack();
+		frame.setSize(500,100);
 		
 	}
 	
@@ -55,4 +60,15 @@ public class BinaryConverter {
              return "-";
         }
    }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton jb = (JButton) e.getSource();
+		if(button.equals(jb)) {
+			System.out.println(jb);
+			label.setText(convert(answer.getText()));
+		}
+		
+	}
 }
